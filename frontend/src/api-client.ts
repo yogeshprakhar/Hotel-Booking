@@ -1,21 +1,26 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-import { HotelSearchResponse, HotelType, UserType, PaymentIntentResponse } from "../../backend/src/shared/type";
+import {
+  HotelSearchResponse,
+  HotelType,
+  UserType,
+  PaymentIntentResponse,
+} from "../../backend/src/shared/type";
 import { BookingFormData } from "./forms/BookingForm/BookingForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
-export const fetchCurrentUser = async():Promise<UserType>=>{
-  const response = await fetch(`${API_BASE_URL}/api/users/me`,{
-    credentials: "include"
-  })
+export const fetchCurrentUser = async (): Promise<UserType> => {
+  const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+    credentials: "include",
+  });
 
-  if(!response.ok){
-    throw new Error("Error while fetching user")
+  if (!response.ok) {
+    throw new Error("Error while fetching user");
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 export const register = async (formData: RegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -175,6 +180,16 @@ export const searchHotels = async (
   return response.json();
 };
 
+export const fetchHotels = async (): Promise<HotelType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels`);
+
+  if (!response.ok) {
+    throw new Error("Error fetching hotels");
+  }
+
+  return response.json();
+};
+
 export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
   if (!response.ok) {
@@ -187,7 +202,7 @@ export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
 export const createPaymentIntent = async (
   hotelId: string,
   numberOfNights: string
-):Promise<PaymentIntentResponse> => {
+): Promise<PaymentIntentResponse> => {
   const response = await fetch(
     `${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
     {
@@ -219,7 +234,7 @@ export const createRoomBooking = async (formData: BookingFormData) => {
       body: JSON.stringify(formData),
     }
   );
-  console.log("checking api client booking")
+  console.log("checking api client booking");
   if (!response.ok) {
     throw new Error("Error booking room");
   }
