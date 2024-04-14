@@ -35,9 +35,9 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="-mt-8 p-3 bg-orange-500 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
+      className="-mt-8 p-3 bg-sky-900 rounded-xl shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
     >
-      <div className="flex flex-row flex-1 p-2 items-center bg-white">
+      <div className="flex flex-row flex-1 p-2 items-center rounded-lg bg-white">
         <MdTravelExplore size={25} className="mr-2" />
         <input
           placeholder="Wherre are you going"
@@ -47,7 +47,7 @@ const SearchBar = () => {
         />
       </div>
 
-      <div className="flex bg-white px-2 py-1 gap-2">
+      <div className="flex rounded-lg bg-white px-2 py-1 gap-2">
         <label className="items-center flex">
           Adults:
           <input
@@ -81,7 +81,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          className="min-w-full bg-white rounded-lg p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />
       </div>
@@ -96,15 +96,15 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          className="min-w-full rounded-lg bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />
       </div>
       <div className="flex gap-1">
-        <button className="w-2/3 bg-blue-600 h-full p-2 font-bold text-xl hover:bg-blue-500 text-white">
+        <button className="w-2/3 bg-indigo-600 h-full rounded-lg p-2 font-bold text-xl hover:bg-indigo-400 text-white">
           Search
         </button>
-        <button className="w-1/3 bg-red-600 h-full p-2 font-bold text-xl hover:bg-red-500 text-white">
+        <button className="w-1/3 bg-lime-700 h-full p-2 rounded-lg font-bold text-xl hover:bg-lime-600 text-white">
           Clear
         </button>
       </div>

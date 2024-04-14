@@ -8,10 +8,10 @@ type Props = {
 
 const SearchResultsCard = ({ hotel }: Props) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rou gap-8 p-8">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rou gap-8 p-8 rounded-md">
       <div className="w-full h-[300px]">
         <img
-          className="w-full h-full object-cover object-center"
+          className=" rounded-md w-full h-full object-cover object-center"
           src={hotel.imageUrls[0]}
           alt="hotel image"
         />
@@ -41,8 +41,8 @@ const SearchResultsCard = ({ hotel }: Props) => {
             <span className="teext-sm"> {hotel.facilities.length >3 && ` +${hotel.facilities.length - 3} more`} </span>
           </div>
           <div className="flex flex-col items-end">
-            <span className="font-bold"> {hotel.pricePerNight}Rs per night</span>
-            <Link to={`/detail/${hotel._id}`} className="bg-blue-600 text-white font-bold p-2 h-full text-xl max-w-fit hover:bg-blue-500">View Details</Link>
+            <span className="font-bold mb-2"> {hotel.pricePerNight}Rs per night</span>
+            <Link to={`/detail/${hotel._id}`} className="bg-blue-600 rounded-lg text-white font-bold p-2 h-full text-xl max-w-fit hover:bg-blue-500">View Details</Link>
           </div>
         </div>
       </div>
