@@ -2,11 +2,11 @@ import { FormEvent, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const search = useSearchContext();
 
   const [destination, setDestination] = useState<string>(search.destination);
@@ -24,13 +24,13 @@ const SearchBar = () => {
       adultCount,
       childCount
     );
-    navigate("/search")
+    navigate("/search");
   };
 
   const minDate = new Date();
   const maxDate = new Date();
 
-  maxDate.setFullYear(maxDate.getFullYear()+1);
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   return (
     <form
@@ -71,7 +71,10 @@ const SearchBar = () => {
           />
         </label>
       </div>
-      <div>
+      <div className="flex">
+        <h5 className="rounded-l-lg bg-white pl-3 p-2 focus:outline-none">
+          Check In -
+        </h5>
         <DatePicker
           selected={checkIn}
           onChange={(date) => setCheckIn(date as Date)}
@@ -81,12 +84,14 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="check-in Date"
-          className="min-w-full bg-white rounded-lg p-2 focus:outline-none"
-          wrapperClassName="min-w-full"
+          className="w-36 rounded-r-lg bg-white p-2 focus:outline-none"
         />
       </div>
 
-      <div>
+      <div className="flex ">
+        <h5 className="rounded-l-lg bg-white pl-4 p-2 focus:outline-none">
+          Check out -
+        </h5>
         <DatePicker
           selected={checkOut}
           onChange={(date) => setCheckOut(date as Date)}
@@ -96,8 +101,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="check-in Date"
-          className="min-w-full rounded-lg bg-white p-2 focus:outline-none"
-          wrapperClassName="min-w-full"
+          className="w-36 rounded-r-lg bg-white p-2 focus:outline-none"
         />
       </div>
       <div className="flex gap-1">

@@ -44,14 +44,14 @@ const Detail = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         {hotel.facilities.map((facility) => (
-          <div className="border border-slate-300 rounded-lg p-3">
+          <div className="flex items-center justify-center border border-slate-300 font-bold text-xl rounded-lg p-3">
             {facility}
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
-        <div className="whitespace-pre-line">{hotel.description}</div>
+        <div className="whitespace-pre-line pt-5 font-semibold text-xl">{hotel.description}</div>
         <div className="h-fit">
           <GuestInfoForm
             pricePerNight={hotel.pricePerNight}

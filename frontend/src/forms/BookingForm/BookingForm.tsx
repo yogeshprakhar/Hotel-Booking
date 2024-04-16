@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import {
-  PaymentIntentResponse,
+  // PaymentIntentResponse,
   UserType,
 } from "../../../../backend/src/shared/type";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { StripeCardElement } from "@stripe/stripe-js";
+// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+// import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -13,7 +13,8 @@ import { useAppContext } from "../../contexts/AppContext";
 
 type Props = {
   currentUser: UserType;
-  paymentIntent: PaymentIntentResponse;
+  price: number;
+  // paymentIntent: PaymentIntentResponse;
 };
 
 export type BookingFormData = {
@@ -25,13 +26,13 @@ export type BookingFormData = {
   checkIn: string;
   checkOut: string;
   hotelId: string;
-  paymentIntentId: string;
+  // paymentIntentId: string;
   totalCost: number;
 };
 
-const BookingForm = ({ currentUser, paymentIntent }: Props) => {
-  const stripe = useStripe();
-  const elements = useElements();
+const BookingForm = ({ currentUser, price }: Props) => {
+  // const stripe = useStripe();
+  // const elements = useElements();
 
   const search = useSearchContext();
   const { hotelId } = useParams();
@@ -50,6 +51,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     }
   );
 
+  // const {data: hotel } = Query.
+
   const { handleSubmit, register } = useForm<BookingFormData>({
     defaultValues: {
       firstName: currentUser.firstName,
@@ -60,24 +63,26 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
       checkIn: search.checkIn.toISOString(),
       checkOut: search.checkOut.toISOString(),
       hotelId: hotelId,
-      totalCost: paymentIntent.totalCost,
-      paymentIntentId: paymentIntent.paymentIntentId,
+      totalCost: price,
     },
   });
 
   const onSubmit = async (formData: BookingFormData) => {
-    if (!stripe || !elements) {
-      return;
-    }
+    // console.log(formData)
+    // if (!stripe || !elements) {
+    //   return;
+    // }
 
-    const result = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement) as StripeCardElement,
-      },
-    });
+    // const result = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
+    //   payment_method: {
+    //     card: elements.getElement(CardElement) as StripeCardElement,
+    //   },
+    // });
 
-    if (result.paymentIntent?.status === "succeeded") {
-      bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
+    try {
+      bookRoom({ ...formData });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -125,19 +130,19 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 
         <div className="bg-blue-200 p-4 rounded-md">
           <div className="font-semibold text-lg">
-            Total Cost: £{paymentIntent.totalCost.toFixed(2)}
+            Total Cost: {price.toFixed(2)}Rs
           </div>
           <div className="text-xs">Includes taxes and charges</div>
         </div>
       </div>
 
-      <div className="space-y-2">
+      {/* <div className="space-y-2">
         <h3 className="text-xl font-semibold"> Payment Details</h3>
         <CardElement
           id="payment-element"
           className="border rounded-md p-2 text-sm"
         />
-      </div>
+      </div> */}
 
       <div className="flex justify-end">
         <button

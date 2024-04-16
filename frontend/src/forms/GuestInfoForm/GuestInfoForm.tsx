@@ -76,6 +76,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       >
         <div className="grid grid-cols-1 gap-4 items-center">
           <div>
+            Check In
             <DatePicker
               required
               selected={checkIn}
@@ -91,6 +92,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             />
           </div>
           <div>
+            Check Out
             <DatePicker
               required
               selected={checkOut}
